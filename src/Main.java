@@ -29,16 +29,15 @@ public class Main {
 		
 		display = new Grid(DISPLAY_WIDTH, DISPLAY_HEIGHT, DEFAULT_SIZE, DEFAULT_SIZE);
 		
+		f.setLayout(new BorderLayout());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		f.add(display, BorderLayout.CENTER);
-		
 		f.setTitle("Quell");
-		
-		//f.setResizable(false);
+		f.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
-		f.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+		f.setResizable(false);
+
 	}
 
 }
