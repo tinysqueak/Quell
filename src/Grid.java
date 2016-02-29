@@ -1,12 +1,16 @@
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Grid extends JComponent implements KeyListener, MouseListener {
@@ -30,10 +34,15 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private boolean gameOver;
 	
 	private ArrayList<Pearl> pearlList;
+	private ArrayList<Block> blockList;
+	
 	private ArrayList<Integer[][]> maps;
 
 	public Grid(int width, int height, int rows, int cols) {
 
+		pearlList = new ArrayList<Pearl>();
+		blockList = new ArrayList<Block>();
+		
 		DISPLAY_WIDTH = width;
 		DISPLAY_HEIGHT = height;
 
@@ -43,6 +52,13 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 		addKeyListener(this);
 		addMouseListener(this);
+		
+		initPlayerImage();
+		initWallImage();
+		initPearlImage();
+		
+		initMaps();
+		initMapObjects();
 
 	}
 	
@@ -66,52 +82,68 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		maps = new ArrayList<Integer[][]>();
 		
 		maps.add(new Integer[][] {
-			{1,2,3},
-			{1,2,3},
-			{1,2,3}
+			{2, 2, 2, 2, 2, 2},
+			{2, 0, 0, 0, 0, 2},
+			{2, 1, 0, 0, 0, 2},
+			{2, 2, 2, 2, 2, 2}
 		});
 		
-		
-	}
-
-	private void initPlayer() {
-
-
-	}
-
-	private void initWalls() {
-
-
-	}
-
-	private void initPearls() {
-
-
 	}
 
 	private void initPlayerImage() {
 
-
+		try {
+			
+			Player.setImage(ImageIO.read(new File("images/player.png")));
+			
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 	private void initWallImage() {
 
+		try {
+
+			Player.setImage(ImageIO.read(new File("images/wall.png")));
+
+		} catch(IOException e) {
+
+			e.printStackTrace();
+
+		}
 
 	}
 
 	private void initPearlImage() {
 
+		try {
+
+			Player.setImage(ImageIO.read(new File("images/pearl.png")));
+
+		} catch(IOException e) {
+
+			e.printStackTrace();
+
+		}
 
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
 
-
+		g.setColor(Color.BLACK);
+				
+		drawCells(g);
+		drawPearls(g);
+		drawPlayer(g);
 
 	}
 	
-	private void drawMap(Graphics g) {
+	private void initMapObjects() {
 		
 		Integer[][] map = maps.get(0);
 		
@@ -136,6 +168,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 				
 				case 3:
 					cell[col][row] = new Pearl(col, row);
+					pearlList.add(new Pearl(col, row));
 					break;
 					
 				case 4:
@@ -143,7 +176,8 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 					break;
 					
 				case 5:
-					//cell[col][row] = new Block(col, row);
+					cell[col][row] = new Cell(col, row);
+					blockList.add(new Block(col, row));
 					break;
 					
 				case 6:
@@ -158,21 +192,36 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 			}
 			
 		}
-		
+						
 	}
 
 	private void drawPlayer(Graphics g) {
 
+		player.draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
 
 	}
 
-	private void drawWalls(Graphics g) {
+	private void drawCells(Graphics g) {
 
+		for(int row = 0; row < ROWS; row++) {
+			
+			for(int col = 0; col < COLS; col++) {
+				
+				cell[col][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
+				
+			}
+			
+		}
 
 	}
 
 	private void drawPearls(Graphics g) {
 
+		for(int i = 0; i < pearlList.size(); i++) {
+			
+			pearlList.get(i).draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
+			
+		}
 
 	}
 
