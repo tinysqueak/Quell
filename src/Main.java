@@ -18,12 +18,6 @@ public class Main {
 
 		// default width and height in cells of the board
 		final int DEFAULT_SIZE = 12;
-
-		// minimum width and height in cells of the board
-		final int MIN_SIZE = 10;
-
-		// maximum width and height in cells of the board
-		final int MAX_SIZE = 36;
 		
 		JFrame f = new JFrame();
 		

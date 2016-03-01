@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -23,8 +24,8 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private final int X_GRID_OFFSET = 0;
 	private final int Y_GRID_OFFSET = 0;
 
-	private final int CELL_WIDTH = 5;
-	private final int CELL_HEIGHT = 5;
+	private final int CELL_WIDTH = 65;
+	private final int CELL_HEIGHT = 65;
 
 	private final int DISPLAY_WIDTH;
 	private final int DISPLAY_HEIGHT;
@@ -37,6 +38,10 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private ArrayList<Block> blockList;
 	
 	private ArrayList<Integer[][]> maps;
+	
+	public static ImageIcon playerIcon;
+	public static ImageIcon pearlIcon;
+	public static ImageIcon wallIcon;
 
 	public Grid(int width, int height, int rows, int cols) {
 
@@ -102,6 +107,8 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 			
 		}
 		
+		playerIcon = new ImageIcon(Player.getImage().getScaledInstance(CELL_WIDTH, CELL_HEIGHT, Image.SCALE_SMOOTH));
+		
 	}
 
 	private void initWallImage() {
@@ -136,10 +143,12 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	public void paintComponent(Graphics g) {
 
 		g.setColor(Color.BLACK);
-				
-		drawCells(g);
+		
+		drawGrid(g);
+		//drawCells(g);
 		drawPearls(g);
 		drawPlayer(g);
+		
 
 	}
 	
@@ -193,6 +202,27 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 			
 		}
 						
+	}
+	
+	private void drawGrid(Graphics g) {
+
+		for (int row = 0; row <= ROWS; row++) {
+
+			g.drawLine(X_GRID_OFFSET,
+					Y_GRID_OFFSET + (row * (CELL_HEIGHT + 1)), X_GRID_OFFSET
+					+ COLS * (CELL_WIDTH + 1), Y_GRID_OFFSET
+					+ (row * (CELL_HEIGHT + 1)));
+
+		}
+
+		for (int col = 0; col <= COLS; col++) {
+
+			g.drawLine(X_GRID_OFFSET + (col * (CELL_WIDTH + 1)), Y_GRID_OFFSET,
+					X_GRID_OFFSET + (col * (CELL_WIDTH + 1)), Y_GRID_OFFSET
+					+ ROWS * (CELL_HEIGHT + 1));
+
+		}
+
 	}
 
 	private void drawPlayer(Graphics g) {
