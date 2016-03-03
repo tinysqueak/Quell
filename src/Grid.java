@@ -38,10 +38,6 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private ArrayList<Block> blockList;
 	
 	private ArrayList<Integer[][]> maps;
-	
-	public static ImageIcon playerIcon;
-	public static ImageIcon pearlIcon;
-	public static ImageIcon wallIcon;
 
 	public Grid(int width, int height, int rows, int cols) {
 
@@ -88,7 +84,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		
 		maps.add(new Integer[][] {
 			{2, 2, 2, 2, 2, 2},
-			{2, 0, 0, 0, 0, 2},
+			{2, 0, 0, 3, 0, 2},
 			{2, 1, 0, 0, 0, 2},
 			{2, 2, 2, 2, 2, 2}
 		});
@@ -107,15 +103,13 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 			
 		}
 		
-		playerIcon = new ImageIcon(Player.getImage().getScaledInstance(CELL_WIDTH, CELL_HEIGHT, Image.SCALE_SMOOTH));
-		
 	}
 
 	private void initWallImage() {
 
 		try {
 
-			Player.setImage(ImageIO.read(new File("images/wall.png")));
+			Wall.setImage(ImageIO.read(new File("images/wall.png")));
 
 		} catch(IOException e) {
 
@@ -129,7 +123,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 		try {
 
-			Player.setImage(ImageIO.read(new File("images/pearl.png")));
+			Pearl.setImage(ImageIO.read(new File("images/pearl.png")));
 
 		} catch(IOException e) {
 
@@ -142,10 +136,10 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	@Override
 	public void paintComponent(Graphics g) {
 
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
 		
-		drawGrid(g);
-		//drawCells(g);
+		//drawGrid(g);
+		drawCells(g);
 		drawPearls(g);
 		drawPlayer(g);
 		
@@ -233,10 +227,11 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	private void drawCells(Graphics g) {
 
-		for(int row = 0; row < ROWS; row++) {
+		for(int row = 0; row < maps.get(0).length; row++) {
 			
-			for(int col = 0; col < COLS; col++) {
+			for(int col = 0; col < maps.get(0)[0].length; col++) {
 				
+				System.out.println(cell[col][row]);
 				cell[col][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
 				
 			}

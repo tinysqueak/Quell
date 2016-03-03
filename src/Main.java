@@ -30,7 +30,7 @@ public class Main {
 		f.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
-		f.setResizable(false);
+		//f.setResizable(false);
 
 	}
 
