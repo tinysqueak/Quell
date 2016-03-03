@@ -10,8 +10,8 @@ public class Cell extends Entity {
 	
 	public boolean isObstacle() {
 		
-		//return this instanceof
-		return false;
+		//or occupied by spike
+		return Main.display.occupiedByWall(getX(), getY());
 		
 	}
 	

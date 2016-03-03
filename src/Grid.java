@@ -33,17 +33,17 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private Player player;
 
 	private boolean gameOver;
-	
+
 	private ArrayList<Pearl> pearlList;
 	private ArrayList<Block> blockList;
-	
-	private ArrayList<Integer[][]> maps;
+
+	public ArrayList<Integer[][]> maps;
 
 	public Grid(int width, int height, int rows, int cols) {
 
 		pearlList = new ArrayList<Pearl>();
 		blockList = new ArrayList<Block>();
-		
+
 		DISPLAY_WIDTH = width;
 		DISPLAY_HEIGHT = height;
 
@@ -53,23 +53,23 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 		addKeyListener(this);
 		addMouseListener(this);
-		
+
 		initPlayerImage();
 		initWallImage();
 		initPearlImage();
-		
+
 		initMaps();
 		initMapObjects();
 
 	}
-	
+
 	/**
 	 * 
 	 */
 	private void initMaps() {
-		
+
 		//initialize pearlList size to number of pearls in particular map
-		
+
 		/*
 		 * 0 = empty cell
 		 * 1 = player
@@ -79,30 +79,30 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		 * 5 = block
 		 * 6 = teleport ring
 		 */
-		
+
 		maps = new ArrayList<Integer[][]>();
-		
+
 		maps.add(new Integer[][] {
 			{2, 2, 2, 2, 2, 2},
 			{2, 0, 0, 3, 0, 2},
 			{2, 1, 0, 0, 0, 2},
 			{2, 2, 2, 2, 2, 2}
 		});
-		
+
 	}
 
 	private void initPlayerImage() {
 
 		try {
-			
+
 			Player.setImage(ImageIO.read(new File("images/player.png")));
-			
+
 		} catch(IOException e) {
-			
+
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 	private void initWallImage() {
@@ -132,72 +132,72 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		}
 
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 
 		//g.setColor(Color.BLACK);
-		
+
 		//drawGrid(g);
 		drawCells(g);
 		drawPearls(g);
 		drawPlayer(g);
-		
+
 
 	}
-	
+
 	private void initMapObjects() {
-		
+
 		Integer[][] map = maps.get(0);
-		
+
 		for(int row = 0; row < map.length; row++) {
-			
+
 			for(int col = 0; col < map[0].length; col++) {
-				
+
 				switch(map[row][col]) {
-				
+
 				case 0:
 					cell[col][row] = new Cell(col, row);
 					break;
-					
+
 				case 1:
 					this.player = new Player(col, row);
 					cell[col][row] = new Cell(col, row);
 					break;
-				
+
 				case 2:
 					cell[col][row] = new Wall(col, row);
 					break;
-				
+
 				case 3:
 					cell[col][row] = new Pearl(col, row);
 					pearlList.add(new Pearl(col, row));
 					break;
-					
+
 				case 4:
 					cell[col][row] = new Spike(col, row);
 					break;
-					
+
 				case 5:
 					cell[col][row] = new Cell(col, row);
 					blockList.add(new Block(col, row));
 					break;
-					
+
 				case 6:
 					cell[col][row] = new TeleportRing(col, row);
 					break;
-					
+
 				default:
 					break;
-				
+
 				}
-				
+
 			}
-			
+
 		}
-						
+
 	}
-	
+
 	private void drawGrid(Graphics g) {
 
 		for (int row = 0; row <= ROWS; row++) {
@@ -227,15 +227,18 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	private void drawCells(Graphics g) {
 
+		/* 
+		 * draws cells based on map dimensions, can maybe change Grid constructor to take map
+		 * specific dimensions?
+		 */ 
 		for(int row = 0; row < maps.get(0).length; row++) {
-			
+
 			for(int col = 0; col < maps.get(0)[0].length; col++) {
-				
-				System.out.println(cell[col][row]);
+
 				cell[col][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
-				
+
 			}
-			
+
 		}
 
 	}
@@ -243,9 +246,9 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	private void drawPearls(Graphics g) {
 
 		for(int i = 0; i < pearlList.size(); i++) {
-			
+
 			pearlList.get(i).draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
-			
+
 		}
 
 	}
@@ -276,30 +279,31 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 
+		//may be some errors with player movement
 		switch(arg0.getKeyCode()) {
-
+		
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_KP_UP:
 		case KeyEvent.VK_W:
-			//move up
+			player.move(player.getX(), player.farthestAccesible(KeyEvent.VK_UP));
 			break;
 
 		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_KP_DOWN:
 		case KeyEvent.VK_S:
-			//move down
+			player.move(player.getX(), player.farthestAccesible(KeyEvent.VK_DOWN));
 			break;
 
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_KP_RIGHT:
 		case KeyEvent.VK_D:
-			//move right
+			player.move(player.farthestAccesible(KeyEvent.VK_RIGHT), getY());
 			break;
 
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_KP_LEFT:
 		case KeyEvent.VK_A:
-			//move left
+			player.move(player.farthestAccesible(KeyEvent.VK_LEFT), getY());
 			break;
 
 		}

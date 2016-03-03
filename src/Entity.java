@@ -105,6 +105,8 @@ public class Entity {
 		this.x = x;
 		this.y = y;
 		
+		Main.display.repaint();
+		
 	}
 	
 	
