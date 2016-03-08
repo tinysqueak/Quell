@@ -297,13 +297,13 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_KP_RIGHT:
 		case KeyEvent.VK_D:
-			player.move(player.farthestAccesible(KeyEvent.VK_RIGHT), getY());
+			player.move(player.farthestAccesible(KeyEvent.VK_RIGHT), player.getY());
 			break;
 
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_KP_LEFT:
 		case KeyEvent.VK_A:
-			player.move(player.farthestAccesible(KeyEvent.VK_LEFT), getY());
+			player.move(player.farthestAccesible(KeyEvent.VK_LEFT), player.getY());
 			break;
 
 		}
