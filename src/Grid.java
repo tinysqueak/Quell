@@ -21,11 +21,11 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	public final int ROWS;
 	public final int COLS;
 
-	private final int X_GRID_OFFSET = 0;
-	private final int Y_GRID_OFFSET = 0;
+	public final int X_GRID_OFFSET = 0;
+	public final int Y_GRID_OFFSET = 0;
 
-	private final int CELL_WIDTH = 65;
-	private final int CELL_HEIGHT = 65;
+	public final int CELL_WIDTH = 65;
+	public final int CELL_HEIGHT = 65;
 
 	private final int DISPLAY_WIDTH;
 	private final int DISPLAY_HEIGHT;

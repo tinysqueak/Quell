@@ -10,6 +10,9 @@ public class Entity {
 	// The background color of the entity
 	private Color myColor;
 	
+	private int leftXPixel;
+	private int topYPixel;
+	
 	/**
 	 * Default constructor
 	 */
@@ -82,6 +85,8 @@ public class Entity {
 	 */
 	public void draw(int xOffset, int yOffset, int width, int height, Graphics g) {
 		
+		//leaves a blank line between boundaries of cell
+		
 		//left edge of cell
 		int xLeft = xOffset + 1 + (this.x * (width + 1));
 		
@@ -109,6 +114,28 @@ public class Entity {
 		
 	}
 	
+	public int getLeftXPixel() {
+		
+		return leftXPixel;
+		
+	}
 	
+	public void setLeftXPixel(int leftXPixel) {
+		
+		this.leftXPixel = leftXPixel;
+		
+	}
+	
+	public int getTopYPixel() {
+		
+		return topYPixel;
+		
+	}
+	
+	public void setTopYPixel(int topYPixel) {
+		
+		this.topYPixel = topYPixel;
+		
+	}
 	
 }

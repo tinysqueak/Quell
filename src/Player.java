@@ -52,10 +52,13 @@ public class Player extends Entity {
 	@Override
 	public void draw(int xOffset, int yOffset, int width, int height, Graphics g) {
 
-		int xLeft = xOffset + 1 + (getX() * (width + 1));
-		int yTop = yOffset + 1 + (getY() * (height + 1));
-
-		g.drawImage(sprite, xLeft, yTop, width, height, null);
+		/*int xLeft = xOffset + 1 + (getX() * (width + 1));
+		int yTop = yOffset + 1 + (getY() * (height + 1));*/
+		
+		setLeftXPixel(Main.display.X_GRID_OFFSET + 1 + (getX() * (Main.display.CELL_WIDTH + 1)));
+		setTopYPixel(Main.display.Y_GRID_OFFSET + 1 + (getY() * (Main.display.CELL_HEIGHT + 1)));
+		
+		g.drawImage(sprite, getLeftXPixel(), getTopYPixel(), width, height, null);
 
 	}
 
@@ -144,7 +147,7 @@ public class Player extends Entity {
 			break;*/
 
 		default:
-			return getX();
+			return -1;
 
 		}
 		//String message = "";
@@ -169,6 +172,64 @@ public class Player extends Entity {
 
 		//return lost;
 
+	}
+	
+	public int farthestPixel(int direction, int farthestAcessible) {
+		
+		switch(direction) {
+		
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_DOWN:
+			return Main.display.Y_GRID_OFFSET + 1 + (farthestAcessible * (Main.display.CELL_HEIGHT + 1));
+			
+		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_LEFT:
+			return Main.display.X_GRID_OFFSET + 1 + (farthestAcessible * (Main.display.CELL_WIDTH + 1));
+					
+		default:
+			return -1;
+			
+		}
+		
+	}
+	
+	@Override
+	public void move(int direction, int farthestPixel) {
+		
+		switch(direction) {
+		
+		case KeyEvent.VK_UP:
+						
+			while(farthestPixel > getTopYPixel()) {
+				
+				try {
+					Thread.sleep(16);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				setTopYPixel(getTopYPixel() + 1);
+				
+				Main.display.repaint();
+				
+			}
+			break;
+			
+		case KeyEvent.VK_DOWN:
+			
+			break;
+		
+		case KeyEvent.VK_RIGHT:
+			
+			break;
+			
+		case KeyEvent.VK_LEFT:
+			
+			break;
+		
+		}
+		
 	}
 
 
