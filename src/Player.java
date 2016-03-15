@@ -11,6 +11,7 @@ import com.sun.glass.events.KeyEvent;
 public class Player extends Entity {
 
 	private static BufferedImage sprite;
+	private int drawCount;
 
 	/**
 	 * Creates a new <code>Player</code> with given coordinates
@@ -55,11 +56,23 @@ public class Player extends Entity {
 		/*int xLeft = xOffset + 1 + (getX() * (width + 1));
 		int yTop = yOffset + 1 + (getY() * (height + 1));*/
 		
-		setLeftXPixel(Main.display.X_GRID_OFFSET + 1 + (getX() * (Main.display.CELL_WIDTH + 1)));
-		setTopYPixel(Main.display.Y_GRID_OFFSET + 1 + (getY() * (Main.display.CELL_HEIGHT + 1)));
+		if(drawCount == 0) {
+			
+			setLeftXPixel();
+			setTopYPixel();
+			
+		} 
 		
 		g.drawImage(sprite, getLeftXPixel(), getTopYPixel(), width, height, null);
 
+		drawCount = 1;
+		
+	}
+	
+	public void draw(Graphics g) {
+		
+		
+		
 	}
 
 	public int farthestAccesible(int direction) {
@@ -199,8 +212,7 @@ public class Player extends Entity {
 		switch(direction) {
 		
 		case KeyEvent.VK_UP:
-						
-			while(farthestPixel > getTopYPixel()) {
+			while(farthestPixel < getTopYPixel()) {
 				
 				try {
 					Thread.sleep(16);
@@ -209,7 +221,7 @@ public class Player extends Entity {
 					e.printStackTrace();
 				}
 				
-				setTopYPixel(getTopYPixel() + 1);
+				setTopYPixel(getTopYPixel() - 1);
 				
 				Main.display.repaint();
 				
@@ -217,11 +229,24 @@ public class Player extends Entity {
 			break;
 			
 		case KeyEvent.VK_DOWN:
-			
+			while(farthestPixel < getTopYPixel()) {
+				
+				try {
+					Thread.sleep(16);
+				} catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
+			}
 			break;
 		
 		case KeyEvent.VK_RIGHT:
-			
+			while(farthestPixel > getLeftXPixel()) {
+				
+				
+			}
 			break;
 			
 		case KeyEvent.VK_LEFT:

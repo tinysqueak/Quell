@@ -18,11 +18,11 @@ public class Main {
 
 		// default width and height in cells of the board
 		final int DEFAULT_SIZE = 12;
-		
+
 		JFrame f = new JFrame();
-		
+
 		display = new Grid(DISPLAY_WIDTH, DISPLAY_HEIGHT, DEFAULT_SIZE, DEFAULT_SIZE);
-		
+
 		f.setLayout(new BorderLayout());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.add(display, BorderLayout.CENTER);

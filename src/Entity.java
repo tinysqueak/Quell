@@ -126,6 +126,12 @@ public class Entity {
 		
 	}
 	
+	public void setLeftXPixel() {
+		
+		leftXPixel = Main.display.X_GRID_OFFSET + 1 + (x * (Main.display.CELL_WIDTH + 1));
+		
+	}
+	
 	public int getTopYPixel() {
 		
 		return topYPixel;
@@ -135,6 +141,12 @@ public class Entity {
 	public void setTopYPixel(int topYPixel) {
 		
 		this.topYPixel = topYPixel;
+		
+	}
+	
+	public void setTopYPixel() {
+		
+		topYPixel = Main.display.Y_GRID_OFFSET + 1 + (getY() * (Main.display.CELL_HEIGHT + 1));
 		
 	}
 	

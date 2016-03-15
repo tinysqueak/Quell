@@ -142,8 +142,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		drawCells(g);
 		drawPearls(g);
 		drawPlayer(g);
-
-
+		
 	}
 
 	private void initMapObjects() {
@@ -285,7 +284,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_KP_UP:
 		case KeyEvent.VK_W:
-			player.move(player.getX(), player.farthestAccesible(KeyEvent.VK_UP));
+			player.move(KeyEvent.VK_UP, player.farthestPixel(KeyEvent.VK_UP, player.farthestAccesible(KeyEvent.VK_UP)));
 			break;
 
 		case KeyEvent.VK_DOWN:
