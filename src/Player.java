@@ -212,7 +212,7 @@ public class Player extends Entity {
 		switch(direction) {
 		
 		case KeyEvent.VK_UP:
-			while(farthestPixel < getTopYPixel()) {
+			if(farthestPixel < getTopYPixel()) {
 				
 				try {
 					Thread.sleep(16);
