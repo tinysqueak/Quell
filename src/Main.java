@@ -2,6 +2,11 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+/**
+ * 
+ * @author William Yang
+ *
+ */
 public class Main {
 
 	public static Grid display;
