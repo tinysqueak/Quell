@@ -213,23 +213,14 @@ public class Player extends Entity {
 		
 		case KeyEvent.VK_UP:
 			if(farthestPixel < getTopYPixel()) {
+				//setTopYPixel(getTopYPixel() - 1);
 				
-				try {
-					Thread.sleep(16);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				setTopYPixel(getTopYPixel() - 1);
-				
-				Main.display.repaint();
-				
+				Main.display.paintComponent(Main.display.getGraphics(), KeyEvent.VK_UP);				
 			}
 			break;
 			
 		case KeyEvent.VK_DOWN:
-			while(farthestPixel < getTopYPixel()) {
+			while(farthestPixel > getTopYPixel()) {
 				
 				try {
 					Thread.sleep(16);

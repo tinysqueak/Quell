@@ -47,6 +47,8 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		DISPLAY_WIDTH = width;
 		DISPLAY_HEIGHT = height;
 
+		//need to modify so that rows & cols match map size, not input values
+		//take map as an input
 		ROWS = rows;
 		COLS = cols;
 		cell = new Cell[COLS][ROWS];
@@ -142,7 +144,22 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		drawCells(g);
 		drawPearls(g);
 		drawPlayer(g);
-		
+
+	}
+
+	public void paintComponent(Graphics g, int direction) {
+
+		try {
+			Thread.sleep(16);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		player.setTopYPixel(player.getTopYPixel() - 1);
+		drawPlayer(g);
+		repaint();
+
 	}
 
 	private void initMapObjects() {
@@ -280,7 +297,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 		//may be some errors with player movement
 		switch(arg0.getKeyCode()) {
-		
+
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_KP_UP:
 		case KeyEvent.VK_W:
