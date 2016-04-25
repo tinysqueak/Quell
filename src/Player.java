@@ -227,7 +227,9 @@ public class Player extends Entity {
 				//Main.display.repaint();
 				Main.display.drawCells(Main.display.getGraphics());
 				//Main.display.drawPearls(Main.display.getGraphics());
+				
 				Main.display.drawPlayer(Main.display.getGraphics());
+				
 				Main.display.repaint();
 				
 			}

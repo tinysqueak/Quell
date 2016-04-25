@@ -138,7 +138,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	@Override
 	public void paintComponent(Graphics g) {
 
-		//g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK);
 
 		//drawGrid(g);
 		drawCells(g);
@@ -259,6 +259,37 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 		}
 
 	}
+	
+	/*public void drawCells(Graphics g, int direction) {
+		
+		switch(direction) {
+		
+		case KeyEvent.VK_UP:
+			for(int row = player.getY(); row > player.farthestAccesible(direction); row--) {
+				
+				cell[player.getX()][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
+
+			}
+			break;
+		case KeyEvent.VK_DOWN:
+			for(int row = player.getY(); row < player.farthestAccesible(direction); row++) {
+
+				cell[player.getX()][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
+
+			}
+			break;
+		
+		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_RIGHT:
+			
+			break;
+		
+		default:
+			break;
+			
+		}
+		
+	}*/
 
 	public void drawPearls(Graphics g) {
 
