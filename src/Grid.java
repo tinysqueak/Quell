@@ -147,7 +147,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	}
 
-	public void paintComponent(Graphics g, int direction) {
+	/*public void paint(Graphics g, int direction) {
 
 		try {
 			Thread.sleep(16);
@@ -156,11 +156,12 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 			e.printStackTrace();
 		}
 
-		player.setTopYPixel(player.getTopYPixel() - 1);
-		drawPlayer(g);
-		repaint();
-
-	}
+		if(player.farthestPixel(KeyEvent.VK_UP, player.farthestAccesible(KeyEvent.VK_UP)) < player.getTopYPixel()) {
+			player.setTopYPixel(player.getTopYPixel() - 1);
+			drawPlayer(g);
+			repaint();
+		}
+	}*/
 
 	private void initMapObjects() {
 
@@ -214,7 +215,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	}
 
-	private void drawGrid(Graphics g) {
+	public void drawGrid(Graphics g) {
 
 		for (int row = 0; row <= ROWS; row++) {
 
@@ -235,13 +236,13 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	}
 
-	private void drawPlayer(Graphics g) {
+	public void drawPlayer(Graphics g) {
 
 		player.draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
 
 	}
 
-	private void drawCells(Graphics g) {
+	public void drawCells(Graphics g) {
 
 		/* 
 		 * draws cells based on map dimensions, can maybe change Grid constructor to take map
@@ -259,7 +260,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 
 	}
 
-	private void drawPearls(Graphics g) {
+	public void drawPearls(Graphics g) {
 
 		for(int i = 0; i < pearlList.size(); i++) {
 

@@ -212,11 +212,27 @@ public class Player extends Entity {
 		switch(direction) {
 		
 		case KeyEvent.VK_UP:
-			if(farthestPixel < getTopYPixel()) {
-				//setTopYPixel(getTopYPixel() - 1);
+			//if(farthestPixel < getTopYPixel()) {
+			//setTopYPixel(getTopYPixel() - 1);
+			for(int i = getTopYPixel(); i > farthestPixel; i--) {
 				
-				Main.display.paintComponent(Main.display.getGraphics(), KeyEvent.VK_UP);				
+				setTopYPixel(i);
+				
+				try {
+					Thread.sleep(16);
+				} catch(InterruptedException e) {
+					e.printStackTrace();					
+				}
+				
+				//Main.display.repaint();
+				Main.display.drawCells(Main.display.getGraphics());
+				//Main.display.drawPearls(Main.display.getGraphics());
+				Main.display.drawPlayer(Main.display.getGraphics());
+				Main.display.repaint();
+				
 			}
+
+			//}
 			break;
 			
 		case KeyEvent.VK_DOWN:
