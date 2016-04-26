@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import javax.swing.*;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -12,6 +13,7 @@ public class Player extends Entity {
 
 	private static BufferedImage sprite;
 	private int drawCount;
+	private int direction;
 
 	/**
 	 * Creates a new <code>Player</code> with given coordinates
@@ -43,6 +45,18 @@ public class Player extends Entity {
 
 		return sprite;
 
+	}
+	
+	public void setDirection(int newDirection) {
+		
+		direction = newDirection;
+		
+	}
+	
+	public int getDirection() {
+		
+		return direction;
+		
 	}
 
 	/**
@@ -214,11 +228,17 @@ public class Player extends Entity {
 		case KeyEvent.VK_UP:
 			//if(farthestPixel < getTopYPixel()) {
 			//setTopYPixel(getTopYPixel() - 1);
+			
+			this.direction = direction;
+			
 			for(int i = getTopYPixel(); i > farthestPixel; i--) {
 				
 				setTopYPixel(i);
 				
-				try {
+				Timer timer = new Timer(16, Main.display);
+				timer.start();
+				
+				/*try {
 					Thread.sleep(16);
 				} catch(InterruptedException e) {
 					e.printStackTrace();					
@@ -230,7 +250,7 @@ public class Player extends Entity {
 				
 				Main.display.drawPlayer(Main.display.getGraphics());
 				
-				Main.display.repaint();
+				Main.display.repaint();*/
 				
 			}
 

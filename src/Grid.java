@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class Grid extends JComponent implements KeyListener, MouseListener {
+public class Grid extends JComponent implements KeyListener, MouseListener, ActionListener {
 
 	public static Cell[][] cell;
 
@@ -400,6 +402,35 @@ public class Grid extends JComponent implements KeyListener, MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch(player.getDirection()) {
+		
+		case KeyEvent.VK_UP:
+			if(player.getY() > player.farthestPixel(KeyEvent.VK_UP, player.farthestAccesible(KeyEvent.VK_UP))) {
+				
+				player.setY(player.getY() - 1);
+				repaint();
+			}
+			break;
+		
+		case KeyEvent.VK_DOWN:
+			break;
+		
+		case KeyEvent.VK_LEFT:
+			break;
+			
+		case KeyEvent.VK_RIGHT:
+			break;
+			
+		default:
+			break;
+		
+		}
+		
 	}
 
 }
