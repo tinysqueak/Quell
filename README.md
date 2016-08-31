@@ -1,2 +1,2 @@
-# Quell
-Quell game
+# SQuell
+SQuell game
