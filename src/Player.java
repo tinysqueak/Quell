@@ -5,7 +5,7 @@ import javax.swing.*;
 import com.sun.glass.events.KeyEvent;
 
 /**
- * 
+ *
  * @author William Yang
  *
  */
@@ -46,17 +46,17 @@ public class Player extends Entity {
 		return sprite;
 
 	}
-	
+
 	public void setDirection(int newDirection) {
-		
+
 		direction = newDirection;
-		
+
 	}
-	
+
 	public int getDirection() {
-		
+
 		return direction;
-		
+
 	}
 
 	/**
@@ -69,24 +69,24 @@ public class Player extends Entity {
 
 		/*int xLeft = xOffset + 1 + (getX() * (width + 1));
 		int yTop = yOffset + 1 + (getY() * (height + 1));*/
-		
+
 		if(drawCount == 0) {
-			
+
 			setLeftXPixel();
 			setTopYPixel();
-			
-		} 
-		
+
+		}
+
 		g.drawImage(sprite, getLeftXPixel(), getTopYPixel(), width, height, null);
 
 		drawCount = 1;
-		
+
 	}
-	
+
 	public void draw(Graphics g) {
-		
-		
-		
+
+
+
 	}
 
 	public int farthestAccesible(int direction) {
@@ -97,12 +97,12 @@ public class Player extends Entity {
 		case KeyEvent.VK_UP:
 			int minY = getY();
 			while(!Grid.cell[getX()][minY].isObstacle()) {
-				
+
 				minY--;
-				
+
 			}
 			return minY + 1;
-			
+
 			/*for(int y = getY(); y >= 0; y--) {
 
 				if(Grid.cell[getX()][y].isObstacle(getX(), y)) {
@@ -116,18 +116,18 @@ public class Player extends Entity {
 		case KeyEvent.VK_DOWN:
 			int maxY = getY();
 			while(!Grid.cell[getX()][maxY].isObstacle()) {
-				
+
 				maxY++;
-				
+
 			}
-			
+
 			return maxY - 1;
 			/*for(int y = getY(); y >= Main.display.maps.get(0).length; y++) {
 
 				if(Grid.cell[getX()][y].isObstacle(getX(), y)) {
 
 					return y;
-					
+
 				}
 
 			}*/
@@ -135,41 +135,41 @@ public class Player extends Entity {
 		case KeyEvent.VK_RIGHT:
 			int maxX = getX();
 			while(!Grid.cell[maxX][getY()].isObstacle()) {
-				
+
 				maxX++;
-				
+
 			}
-			
+
 			return maxX - 1;
-			
+
 			/*for(int x = getX(); x <= Main.display.maps.get(0)[0].length; x++) {
 
 				if(Grid.cell[x][getY()].isObstacle(x, getY())) {
 
 					return x;
-					
+
 				}
-				
+
 			}
 			break;
 */
 		case KeyEvent.VK_LEFT:
 			int minX = getX();
 			while(!Grid.cell[minX][getY()].isObstacle()) {
-				
+
 				minX--;
-				
+
 			}
-			
+
 			return minX + 1;
 			/*for(int x = getX(); x >= 0; x--) {
-				
+
 				if(Grid.cell[x][getY()].isObstacle(x, getY())) {
-					
+
 					return x;
-					
+
 				}
-				
+
 			}
 			break;*/
 
@@ -200,90 +200,90 @@ public class Player extends Entity {
 		//return lost;
 
 	}
-	
+
 	public int farthestPixel(int direction, int farthestAcessible) {
-		
+
 		switch(direction) {
-		
+
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_DOWN:
 			return Main.display.Y_GRID_OFFSET + 1 + (farthestAcessible * (Main.display.CELL_HEIGHT + 1));
-			
+
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_LEFT:
 			return Main.display.X_GRID_OFFSET + 1 + (farthestAcessible * (Main.display.CELL_WIDTH + 1));
-					
+
 		default:
 			return -1;
-			
+
 		}
-		
+
 	}
-	
+
 	@Override
 	public void move(int direction, int farthestPixel) {
-		
+
 		switch(direction) {
-		
+
 		case KeyEvent.VK_UP:
 			//if(farthestPixel < getTopYPixel()) {
 			//setTopYPixel(getTopYPixel() - 1);
-			
+
 			this.direction = direction;
-			
+
 			for(int i = getTopYPixel(); i > farthestPixel; i--) {
-				
+
 				setTopYPixel(i);
-				
+
 				Timer timer = new Timer(16, Main.display);
 				timer.start();
-				
+
 				/*try {
 					Thread.sleep(16);
 				} catch(InterruptedException e) {
-					e.printStackTrace();					
+					e.printStackTrace();
 				}
-				
+
 				//Main.display.repaint();
 				Main.display.drawCells(Main.display.getGraphics());
 				//Main.display.drawPearls(Main.display.getGraphics());
-				
+
 				Main.display.drawPlayer(Main.display.getGraphics());
-				
+
 				Main.display.repaint();*/
-				
+
 			}
 
 			//}
 			break;
-			
+
 		case KeyEvent.VK_DOWN:
 			while(farthestPixel > getTopYPixel()) {
-				
+
 				try {
 					Thread.sleep(16);
 				} catch(InterruptedException e) {
 					e.printStackTrace();
 				}
-				
-				
-				
+
+
+
 			}
 			break;
-		
+
 		case KeyEvent.VK_RIGHT:
 			while(farthestPixel > getLeftXPixel()) {
-				
-				
+
+
 			}
 			break;
-			
+
 		case KeyEvent.VK_LEFT:
-			
+
 			break;
-		
+
 		}
-		
+
 	}
 
 

@@ -68,7 +68,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener, Acti
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initMaps() {
 
@@ -246,10 +246,10 @@ public class Grid extends JComponent implements KeyListener, MouseListener, Acti
 
 	public void drawCells(Graphics g) {
 
-		/* 
+		/*
 		 * draws cells based on map dimensions, can maybe change Grid constructor to take map
 		 * specific dimensions?
-		 */ 
+		 */
 		for(int row = 0; row < maps.get(0).length; row++) {
 
 			for(int col = 0; col < maps.get(0)[0].length; col++) {
@@ -261,14 +261,14 @@ public class Grid extends JComponent implements KeyListener, MouseListener, Acti
 		}
 
 	}
-	
+
 	/*public void drawCells(Graphics g, int direction) {
-		
+
 		switch(direction) {
-		
+
 		case KeyEvent.VK_UP:
 			for(int row = player.getY(); row > player.farthestAccesible(direction); row--) {
-				
+
 				cell[player.getX()][row].draw(X_GRID_OFFSET, Y_GRID_OFFSET, CELL_WIDTH, CELL_HEIGHT, g);
 
 			}
@@ -280,17 +280,17 @@ public class Grid extends JComponent implements KeyListener, MouseListener, Acti
 
 			}
 			break;
-		
+
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_RIGHT:
-			
+
 			break;
-		
+
 		default:
 			break;
-			
+
 		}
-		
+
 	}*/
 
 	public void drawPearls(Graphics g) {
@@ -408,29 +408,29 @@ public class Grid extends JComponent implements KeyListener, MouseListener, Acti
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		switch(player.getDirection()) {
-		
+
 		case KeyEvent.VK_UP:
 			if(player.getY() > player.farthestPixel(KeyEvent.VK_UP, player.farthestAccesible(KeyEvent.VK_UP))) {
-				
+
 				player.setY(player.getY() - 1);
 				repaint();
 			}
 			break;
-		
+
 		case KeyEvent.VK_DOWN:
 			break;
-		
+
 		case KeyEvent.VK_LEFT:
 			break;
-			
+
 		case KeyEvent.VK_RIGHT:
 			break;
-			
+
 		default:
 			break;
-		
+
 		}
-		
+
 	}
 
 }
